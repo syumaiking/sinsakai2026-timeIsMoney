@@ -11,6 +11,15 @@ public class Shift {
 	private int breakTime;
 	private int hourlyWage;
 
+	public Shift(int id, LocalDate workDate, LocalTime startTime, LocalTime endTime, int breakTime, int hourlyWage) {
+		this.id = id;
+		this.workDate = workDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.breakTime = breakTime;
+		this.hourlyWage = hourlyWage;
+	}
+
 	public int getId() {
 		return id;
 	}
