@@ -1,10 +1,15 @@
 package main;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import constant.Menu;
+import service.ShiftService;
 import util.InputUtil;
 
 public class Main {
 	public static void main(String[] args) {
+		ShiftService shiftService = new ShiftService();
 
 		while (true) {
 
@@ -22,7 +27,12 @@ public class Main {
 
 				switch (shiftNumber) {
 				case 1: {
-					System.out.println("登録");
+					LocalDate workDate = input.inputDate("勤務日を入力してください 例(XXXX-YY-ZZ):");
+					LocalTime startTime = input.inputTime("出勤時間を入力してください 例(SS:mm):");
+					LocalTime endTime = input.inputTime("退勤時間を入力してください 例(EE:mm):");
+					int breakTime = input.inputInt("休憩時間を入力してください 例(BB)分");
+					shiftService.addShift(workDate, startTime, endTime, breakTime);
+					shiftService.showInfo();
 					break;
 				}
 				case 2: {

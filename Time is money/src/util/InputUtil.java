@@ -13,8 +13,8 @@ public class InputUtil {
 
 	public int inputInt(String message) {
 		System.out.println(message);
-		int number = scanner.nextInt();
-		return number;
+		String input = scanner.nextLine();
+		return Integer.parseInt(input);
 	}
 
 	public LocalDate inputDate(String message) {
