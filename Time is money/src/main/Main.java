@@ -61,7 +61,7 @@ public class Main {
 				int SalaryNumber = input.inputInt("番号を入力してください:");
 				switch (SalaryNumber) {
 				case 1: {
-					System.out.println("給与確認");
+					menu.showSalary();
 					break;
 				}
 				case 2: {

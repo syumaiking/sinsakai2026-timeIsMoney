@@ -92,4 +92,11 @@ public class Menu {
 			System.out.println("勤務データを削除しました");
 		}
 	}
+
+	public void showSalary() {
+		int year = input.inputInt("確認する年を入力してください 例XXXX");
+		int month = input.inputInt("確認する月を入力してください 例MM");
+		int salary = shiftService.calculateMonthSalary(year, month);
+		System.out.println(year + "年" + month + "月の給与額は" + salary + "円です");
+	}
 }

@@ -1,5 +1,6 @@
 package service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -70,5 +71,27 @@ public class ShiftService {
 		}
 		shifts.remove(shift);
 		return true;
+	}
+
+	public long calculateWorkTime(Shift shift) {
+		long workTimes = Duration.between(shift.getStartTime(), shift.getEndTime()).toMinutes();
+		workTimes -= shift.getBreakTime();
+		return workTimes;
+	}
+
+	public int calculateSalary(Shift shift) {
+		long workTimes = calculateWorkTime(shift);
+		double salay = workTimes * shift.getHourlyWage() / 60.0;
+		return (int) salay;
+	}
+
+	public int calculateMonthSalary(int year, int Month) {
+		int totalSalary = 0;
+		for (Shift shift : shifts) {
+			if (shift.getWorkDate().getYear() == year && shift.getWorkDate().getMonthValue() == Month) {
+				totalSalary += calculateSalary(shift);
+			}
+		}
+		return totalSalary;
 	}
 }
