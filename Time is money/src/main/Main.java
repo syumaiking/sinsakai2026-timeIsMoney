@@ -65,15 +65,15 @@ public class Main {
 					break;
 				}
 				case 2: {
-					System.out.println("時給変更");
+					menu.showChangeHourlyWage();
 					break;
 				}
 				case 3: {
-					System.out.println("目標給与の設定");
+					menu.showTargetSalary();
 					break;
 				}
 				case 4: {
-					System.out.println("目標給料の確認");
+					menu.showTargetSalaryConfirmation();
 					break;
 				}
 				case 0: {

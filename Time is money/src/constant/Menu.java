@@ -99,4 +99,61 @@ public class Menu {
 		int salary = shiftService.calculateMonthSalary(year, month);
 		System.out.println(year + "年" + month + "月の給与額は" + salary + "円です");
 	}
+
+	public void showChangeHourlyWage() {
+		System.out.println("現在の時給" + shiftService.getCurrentHourlyWage() + "円");
+		int hourlyWage = input.inputInt("新しい時給を入力してください:");
+		if (hourlyWage == 0) {
+			System.out.println("正しい金額を入力してください");
+			return;
+		}
+
+		shiftService.setCurrentHourlyWage(hourlyWage);
+		System.out.println("時給を" + hourlyWage + "円に変更しました");
+	}
+
+	public void showTargetSalary() {
+		int year = input.inputInt("目標を設定したい年を入力してください 例XXXX:");
+		int month = input.inputInt("目標を設定したい月を入力してください 例MM:");
+		int targetSalary = input.inputInt("目標給与を入力してください:");
+		if (month < 1 || month > 12) {
+			System.out.println("1~12月の中で入力してください");
+			return;
+		}
+
+		if (targetSalary == 0) {
+			System.out.println("正しい給与を入力してください");
+			return;
+		}
+		shiftService.setTargetSalary(year, month, targetSalary);
+		System.out.println(year + "年" + month + "月の目標給与を" + targetSalary + "円に設定しました");
+	}
+
+	public void showTargetSalaryConfirmation() {
+		int year = input.inputInt("確認したい年を入力してください 例XXXX:");
+		int month = input.inputInt("確認したい月を入力してください 例MM:");
+
+		if (month < 1 || month > 12) {
+			System.out.println("1~12月の中で入力してください");
+			return;
+		}
+		Integer targetSalary = shiftService.getTargetSalary(year, month);
+
+		if (targetSalary == null) {
+			System.out.println(year + "年" + month + "月は目標が設定されていません");
+			return;
+		}
+		int currentSalary = shiftService.calculateMonthSalary(year, month);
+		int restSalary = targetSalary - currentSalary;
+		double restWorkTime = (double) restSalary / shiftService.getCurrentHourlyWage();
+		int hours = (int) restWorkTime;
+		int minutes = (int) ((restWorkTime - hours) * 60);
+
+		if (restSalary > 0) {
+			System.out.println("目標金額まで残り" + restSalary + "円です");
+			System.out.println("残り" + hours + "時間" + minutes + "分で達成できます");
+		} else {
+			System.out.println("目標金額を達成しました！");
+		}
+	}
 }

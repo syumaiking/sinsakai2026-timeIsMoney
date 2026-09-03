@@ -4,13 +4,15 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.Shift;
 
 public class ShiftService {
 	private List<Shift> shifts;
-	private int targetSalary;
+	private Map<String, Integer> targetSalaries;
 	private int currentHourlyWage;
 	private int nextId;
 
@@ -22,6 +24,7 @@ public class ShiftService {
 
 	public ShiftService() {
 		shifts = new ArrayList<>();
+		targetSalaries = new HashMap<>();
 		nextId = 1;
 		currentHourlyWage = 1165;
 	}
@@ -94,4 +97,25 @@ public class ShiftService {
 		}
 		return totalSalary;
 	}
+
+	public int getCurrentHourlyWage() {
+		return currentHourlyWage;
+	}
+
+	public void setCurrentHourlyWage(int currentHourlyWage) {
+		this.currentHourlyWage = currentHourlyWage;
+	}
+
+	public void setTargetSalary(int year, int month, int targetSalary) {
+		String key = year + "-" + month;
+
+		targetSalaries.put(key, targetSalary);
+	}
+
+	public Integer getTargetSalary(int year, int month) {
+		String key = year + "-" + month;
+
+		return targetSalaries.get(key);
+	}
+
 }
