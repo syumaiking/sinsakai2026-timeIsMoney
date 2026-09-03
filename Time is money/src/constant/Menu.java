@@ -79,4 +79,17 @@ public class Menu {
 			System.out.println("勤務データを更新しました");
 		}
 	}
+
+	public void showDeleteShift() {
+		int id = input.inputInt("削除するIDを入力してください:");
+		Shift shift = shiftService.findShiftById(id);
+		if (shift == null) {
+			System.out.println("入力されたIDが存在しません");
+			return;
+		}
+		boolean result = shiftService.deleteShift(id);
+		if (result) {
+			System.out.println("勤務データを削除しました");
+		}
+	}
 }

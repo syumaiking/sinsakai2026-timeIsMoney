@@ -41,7 +41,9 @@ public class Main {
 					break;
 				}
 				case 4: {
-					System.out.println("削除");
+					List<Shift> shifts = shiftService.getAllShifts();
+					menu.showAllShift(shifts);
+					menu.showDeleteShift();
 					break;
 				}
 				case 0: {

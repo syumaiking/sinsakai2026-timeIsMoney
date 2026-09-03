@@ -62,4 +62,13 @@ public class ShiftService {
 		return true;
 	}
 
+	public boolean deleteShift(int id) {
+		Shift shift = findShiftById(id);
+
+		if (shift == null) {
+			return false;
+		}
+		shifts.remove(shift);
+		return true;
+	}
 }
