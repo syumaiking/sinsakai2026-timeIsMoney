@@ -32,6 +32,34 @@ public class ShiftService {
 			System.out.println("出勤時間：" + shift.getStartTime());
 			System.out.println("退勤時間：" + shift.getEndTime());
 			System.out.println("休憩時間：" + shift.getBreakTime() + "分");
+			System.out.println("--------------------");
 		}
 	}
+
+	public List<Shift> getAllShifts() {
+		return shifts;
+	}
+
+	public Shift findShiftById(int id) {
+		for (Shift shift : shifts) {
+			if (shift.getId() == id) {
+				return shift;
+			}
+		}
+		return null;
+	}
+
+	public boolean updateShift(int id, LocalDate workDate, LocalTime startTime, LocalTime endTime, int breakTime) {
+		Shift shift = findShiftById(id);
+		if (shift == null) {
+			return false;
+		}
+		shift.setWorkDate(workDate);
+		shift.setStartTime(startTime);
+		shift.setEndTime(endTime);
+		shift.setBreakTime(breakTime);
+
+		return true;
+	}
+
 }

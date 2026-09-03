@@ -1,22 +1,21 @@
 package main;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.List;
 
 import constant.Menu;
+import model.Shift;
 import service.ShiftService;
 import util.InputUtil;
 
 public class Main {
 	public static void main(String[] args) {
+		InputUtil input = new InputUtil();
 		ShiftService shiftService = new ShiftService();
-
+		Menu menu = new Menu(input, shiftService);
 		while (true) {
 
-			Menu menu = new Menu();
 			menu.showMainMenu();
 
-			InputUtil input = new InputUtil();
 			int number = input.inputInt("番号を入力してください:");
 
 			switch (number) {
@@ -27,20 +26,18 @@ public class Main {
 
 				switch (shiftNumber) {
 				case 1: {
-					LocalDate workDate = input.inputDate("勤務日を入力してください 例(XXXX-YY-ZZ):");
-					LocalTime startTime = input.inputTime("出勤時間を入力してください 例(SS:mm):");
-					LocalTime endTime = input.inputTime("退勤時間を入力してください 例(EE:mm):");
-					int breakTime = input.inputInt("休憩時間を入力してください 例(BB)分");
-					shiftService.addShift(workDate, startTime, endTime, breakTime);
-					shiftService.showInfo();
+					menu.showShiftRegistration();
 					break;
 				}
 				case 2: {
-					System.out.println("一覧");
+					List<Shift> shifts = shiftService.getAllShifts();
+					menu.showAllShift(shifts);
 					break;
 				}
 				case 3: {
-					System.out.println("更新");
+					List<Shift> shifts = shiftService.getAllShifts();
+					menu.showAllShift(shifts);
+					menu.showUpdateShift();
 					break;
 				}
 				case 4: {
