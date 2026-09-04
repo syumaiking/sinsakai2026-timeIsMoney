@@ -1,5 +1,8 @@
 package service;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,11 +18,13 @@ public class ShiftService {
 	private Map<String, Integer> targetSalaries;
 	private int currentHourlyWage;
 	private int nextId;
+	private String filePath = "shifts.csv";
 
 	public void addShift(LocalDate workDate, LocalTime startTime, LocalTime endTime, int breakTime) {
 		Shift shift = new Shift(nextId, workDate, startTime, endTime, breakTime, currentHourlyWage);
 		shifts.add(shift);
 		nextId++;
+		saveToFile();
 	}
 
 	public ShiftService() {
@@ -116,6 +121,18 @@ public class ShiftService {
 		String key = year + "-" + month;
 
 		return targetSalaries.get(key);
+	}
+
+	public void saveToFile() {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+			for (Shift shift : shifts) {
+				writer.write(shift.getId() + "," + shift.getWorkDate() + "," + shift.getStartTime() + ","
+						+ shift.getEndTime() + ","
+						+ shift.getBreakTime() + "," + shift.getHourlyWage());
+			}
+		} catch (IOException e) {
+			System.out.println("ファイルの保存に失敗しました");
+		}
 	}
 
 }
