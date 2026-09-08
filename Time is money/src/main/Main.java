@@ -11,6 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		InputUtil input = new InputUtil();
 		ShiftService shiftService = new ShiftService();
+		shiftService.loadFromFile();
 		Menu menu = new Menu(input, shiftService);
 		while (true) {
 

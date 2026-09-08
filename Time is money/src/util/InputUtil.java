@@ -2,6 +2,7 @@ package util;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class InputUtil {
@@ -12,22 +13,39 @@ public class InputUtil {
 	}
 
 	public int inputInt(String message) {
-		System.out.println(message);
-		String input = scanner.nextLine();
-		return Integer.parseInt(input);
+		while (true) {
+			try {
+				System.out.println(message);
+				String input = scanner.nextLine();
+				return Integer.parseInt(input);
+			} catch (NumberFormatException e) {
+				System.out.println("数字を入力してください");
+			}
+		}
 	}
 
 	public LocalDate inputDate(String message) {
-		System.out.println(message);
-		String input = scanner.nextLine();
-		LocalDate date = LocalDate.parse(input);
-		return date;
+		while (true) {
+			try {
+				System.out.println(message);
+				String input = scanner.nextLine();
+				return LocalDate.parse(input);
+			} catch (DateTimeParseException e) {
+				System.out.println("正しい日付を入力してください 例(XXXX-YY-ZZ)");
+			}
+
+		}
 	}
 
 	public LocalTime inputTime(String message) {
-		System.out.println(message);
-		String input = scanner.nextLine();
-		LocalTime time = LocalTime.parse(input);
-		return time;
+		while (true) {
+			try {
+				System.out.println(message);
+				String input = scanner.nextLine();
+				return LocalTime.parse(input);
+			} catch (DateTimeParseException e) {
+				System.out.println("正しい時間を入力してください 例(HH-MM)");
+			}
+		}
 	}
 }

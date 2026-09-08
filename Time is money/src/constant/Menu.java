@@ -46,9 +46,20 @@ public class Menu {
 		LocalDate workDate = input.inputDate("勤務日を入力してください 例(XXXX-YY-ZZ):");
 		LocalTime startTime = input.inputTime("出勤時間を入力してください 例(SS:mm):");
 		LocalTime endTime = input.inputTime("退勤時間を入力してください 例(EE:mm):");
-		int breakTime = input.inputInt("休憩時間を入力してください 例(BB)分");
+		int breakTime;
+		while (true) {
+			breakTime = input.inputInt("休憩時間を入力してください 例(BB)分");
+
+			if (breakTime >= 0) {
+				break;
+			}
+
+			System.out.println("正しい時間を入力してください");
+		}
+
 		shiftService.addShift(workDate, startTime, endTime, breakTime);
 		System.out.println("勤務実績を登録しました。");
+
 	}
 
 	public void showAllShift(List<Shift> shifts) {
@@ -94,8 +105,8 @@ public class Menu {
 	}
 
 	public void showSalary() {
-		int year = input.inputInt("確認する年を入力してください 例XXXX");
-		int month = input.inputInt("確認する月を入力してください 例MM");
+		int year = input.inputInt("確認する年を入力してください 例(XXXX)");
+		int month = input.inputInt("確認する月を入力してください 例(MM)");
 		int salary = shiftService.calculateMonthSalary(year, month);
 		System.out.println(year + "年" + month + "月の給与額は" + salary + "円です");
 	}
@@ -113,8 +124,8 @@ public class Menu {
 	}
 
 	public void showTargetSalary() {
-		int year = input.inputInt("目標を設定したい年を入力してください 例XXXX:");
-		int month = input.inputInt("目標を設定したい月を入力してください 例MM:");
+		int year = input.inputInt("目標を設定したい年を入力してください 例(XXXX):");
+		int month = input.inputInt("目標を設定したい月を入力してください 例(MM):");
 		int targetSalary = input.inputInt("目標給与を入力してください:");
 		if (month < 1 || month > 12) {
 			System.out.println("1~12月の中で入力してください");
@@ -130,8 +141,8 @@ public class Menu {
 	}
 
 	public void showTargetSalaryConfirmation() {
-		int year = input.inputInt("確認したい年を入力してください 例XXXX:");
-		int month = input.inputInt("確認したい月を入力してください 例MM:");
+		int year = input.inputInt("確認したい年を入力してください 例(XXXX):");
+		int month = input.inputInt("確認したい月を入力してください 例(MM):");
 
 		if (month < 1 || month > 12) {
 			System.out.println("1~12月の中で入力してください");

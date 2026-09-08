@@ -1,6 +1,8 @@
 package service;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
@@ -67,7 +69,7 @@ public class ShiftService {
 		shift.setStartTime(startTime);
 		shift.setEndTime(endTime);
 		shift.setBreakTime(breakTime);
-
+		saveToFile();
 		return true;
 	}
 
@@ -78,6 +80,7 @@ public class ShiftService {
 			return false;
 		}
 		shifts.remove(shift);
+		saveToFile();
 		return true;
 	}
 
@@ -129,9 +132,34 @@ public class ShiftService {
 				writer.write(shift.getId() + "," + shift.getWorkDate() + "," + shift.getStartTime() + ","
 						+ shift.getEndTime() + ","
 						+ shift.getBreakTime() + "," + shift.getHourlyWage());
+				writer.newLine();
 			}
 		} catch (IOException e) {
 			System.out.println("ファイルの保存に失敗しました");
+		}
+	}
+
+	public void loadFromFile() {
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+				String[] data = line.split(",");
+				int id = Integer.parseInt(data[0]);
+				LocalDate workDate = LocalDate.parse(data[1]);
+				LocalTime startTime = LocalTime.parse(data[2]);
+				LocalTime endTime = LocalTime.parse(data[3]);
+				int breakTime = Integer.parseInt(data[4]);
+				int hourlyWage = Integer.parseInt(data[5]);
+
+				Shift shift = new Shift(id, workDate, startTime, endTime, breakTime, hourlyWage);
+				shifts.add(shift);
+				if (id >= nextId) {
+					nextId = id + 1;
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("ファイルの読み込みに失敗しました");
 		}
 	}
 
