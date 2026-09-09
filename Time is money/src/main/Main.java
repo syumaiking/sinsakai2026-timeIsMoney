@@ -22,6 +22,7 @@ public class Main {
 
 			switch (number) {
 			case 1: {
+				//勤務管理メニュー
 				menu.showShiftMenu();
 
 				int shiftNumber = input.inputInt("番号を入力してください:");
@@ -64,6 +65,7 @@ public class Main {
 				break;
 			}
 			case 2: {
+				//給与管理メニュー
 				menu.showSalaryMenu();
 
 				int SalaryNumber = input.inputInt("番号を入力してください:");
