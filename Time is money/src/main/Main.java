@@ -15,7 +15,8 @@ public class Main {
 		Menu menu = new Menu(input, shiftService);
 		while (true) {
 
-			menu.showMainMenu();//メインメニュー
+			//メインメニュー
+			menu.showMainMenu();
 
 			int number = input.inputInt("番号を入力してください:");
 
@@ -27,31 +28,37 @@ public class Main {
 
 				switch (shiftNumber) {
 				case 1: {
-					menu.showShiftRegistration();//勤務登録
+					//勤務登録
+					menu.showShiftRegistration();
 					break;
 				}
 				case 2: {
+					//勤務一覧
 					List<Shift> shifts = shiftService.getAllShifts();
-					menu.showAllShift(shifts);//勤務一覧
+					menu.showAllShift(shifts);
 					break;
 				}
 				case 3: {
+					//勤務データ更新
 					List<Shift> shifts = shiftService.getAllShifts();
 					menu.showAllShift(shifts);
-					menu.showUpdateShift();//勤務データ更新
+					menu.showUpdateShift();
 					break;
 				}
 				case 4: {
+					//勤務データ削除
 					List<Shift> shifts = shiftService.getAllShifts();
 					menu.showAllShift(shifts);
-					menu.showDeleteShift();//勤務データ削除
+					menu.showDeleteShift();
 					break;
 				}
 				case 0: {
-					break;//戻る
+					//戻る
+					break;
 				}
 				default:
-					System.out.println("0~4の番号択してください");//例外処理
+					//戻る
+					System.out.println("0~4の番号択してください");
 					break;
 				}
 				break;
@@ -62,26 +69,32 @@ public class Main {
 				int SalaryNumber = input.inputInt("番号を入力してください:");
 				switch (SalaryNumber) {
 				case 1: {
-					menu.showSalary();//給与確認
+					//給与確認
+					menu.showSalary();
 					break;
 				}
 				case 2: {
-					menu.showChangeHourlyWage();//時給変更
+					//時給変更
+					menu.showChangeHourlyWage();
 					break;
 				}
 				case 3: {
-					menu.showTargetSalary();//給与目標の設定
+					//給与目標の設定
+					menu.showTargetSalary();
 					break;
 				}
 				case 4: {
-					menu.showTargetSalaryConfirmation();//目標給料の確認
+					//目標給料の確認
+					menu.showTargetSalaryConfirmation();
 					break;
 				}
 				case 0: {
-					break;//戻る
+					//戻る
+					break;
 				}
 				default:
-					System.out.println("0~4の番号を入力してください");//例外
+					//例外
+					System.out.println("0~4の番号を入力してください");
 				}
 				break;
 			}
