@@ -12,6 +12,7 @@ public class InputUtil {
 		scanner = new Scanner(System.in);
 	}
 
+	//数字入力受付
 	public int inputInt(String message) {
 		while (true) {
 			try {
@@ -24,6 +25,7 @@ public class InputUtil {
 		}
 	}
 
+	//LocalDateの入力受付
 	public LocalDate inputDate(String message) {
 		while (true) {
 			try {
@@ -37,6 +39,7 @@ public class InputUtil {
 		}
 	}
 
+	//LocalTimeの入力受付
 	public LocalTime inputTime(String message) {
 		while (true) {
 			try {

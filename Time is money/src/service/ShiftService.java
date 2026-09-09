@@ -22,6 +22,7 @@ public class ShiftService {
 	private int nextId;
 	private String filePath = "shifts.csv";
 
+	//勤怠登録
 	public void addShift(LocalDate workDate, LocalTime startTime, LocalTime endTime, int breakTime) {
 		Shift shift = new Shift(nextId, workDate, startTime, endTime, breakTime, currentHourlyWage);
 		shifts.add(shift);
@@ -29,6 +30,7 @@ public class ShiftService {
 		saveToFile();
 	}
 
+	//シフトのデータ
 	public ShiftService() {
 		shifts = new ArrayList<>();
 		targetSalaries = new HashMap<>();
@@ -36,6 +38,7 @@ public class ShiftService {
 		currentHourlyWage = 1165;
 	}
 
+	//データ表示
 	public void showInfo() {
 		for (Shift shift : shifts) {
 			System.out.println("ID：" + shift.getId());
@@ -51,6 +54,7 @@ public class ShiftService {
 		return shifts;
 	}
 
+	//IDを探す
 	public Shift findShiftById(int id) {
 		for (Shift shift : shifts) {
 			if (shift.getId() == id) {
@@ -60,6 +64,7 @@ public class ShiftService {
 		return null;
 	}
 
+	//勤務データ更新
 	public boolean updateShift(int id, LocalDate workDate, LocalTime startTime, LocalTime endTime, int breakTime) {
 		Shift shift = findShiftById(id);
 		if (shift == null) {
@@ -73,6 +78,7 @@ public class ShiftService {
 		return true;
 	}
 
+	//シフトデータ削除
 	public boolean deleteShift(int id) {
 		Shift shift = findShiftById(id);
 
@@ -84,18 +90,21 @@ public class ShiftService {
 		return true;
 	}
 
+	//勤務時間計算
 	public long calculateWorkTime(Shift shift) {
 		long workTimes = Duration.between(shift.getStartTime(), shift.getEndTime()).toMinutes();
 		workTimes -= shift.getBreakTime();
 		return workTimes;
 	}
 
+	//給与計算
 	public int calculateSalary(Shift shift) {
 		long workTimes = calculateWorkTime(shift);
 		double salay = workTimes * shift.getHourlyWage() / 60.0;
 		return (int) salay;
 	}
 
+	//1ヶ月の給与計算
 	public int calculateMonthSalary(int year, int Month) {
 		int totalSalary = 0;
 		for (Shift shift : shifts) {
@@ -126,6 +135,7 @@ public class ShiftService {
 		return targetSalaries.get(key);
 	}
 
+	//データ保存
 	public void saveToFile() {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 			for (Shift shift : shifts) {
@@ -139,6 +149,7 @@ public class ShiftService {
 		}
 	}
 
+	//データ読み込み
 	public void loadFromFile() {
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			String line;

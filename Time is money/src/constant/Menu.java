@@ -17,6 +17,7 @@ public class Menu {
 		this.shiftService = shiftService;
 	}
 
+	//メインメニュー表示
 	public void showMainMenu() {
 		System.out.println("メインメニュー");
 		System.out.println("1.勤怠管理");
@@ -24,6 +25,7 @@ public class Menu {
 		System.out.println("0.終了");
 	}
 
+	//勤怠管理のメニュー表示
 	public void showShiftMenu() {
 		System.out.println("勤怠管理");
 		System.out.println("1.登録");
@@ -33,6 +35,7 @@ public class Menu {
 		System.out.println("0.戻る");
 	}
 
+	//給与管理のメニュー表示
 	public void showSalaryMenu() {
 		System.out.println("給与管理");
 		System.out.println("1.給与確認");
@@ -42,6 +45,7 @@ public class Menu {
 		System.out.println("0.戻る");
 	}
 
+	//登録の処理
 	public void showShiftRegistration() {
 		LocalDate workDate = input.inputDate("勤務日を入力してください 例(XXXX-YY-ZZ):");
 		LocalTime startTime = input.inputTime("出勤時間を入力してください 例(SS:mm):");
@@ -62,6 +66,7 @@ public class Menu {
 
 	}
 
+	//一覧の処理
 	public void showAllShift(List<Shift> shifts) {
 		System.out.println("--------------------");
 		for (Shift shift : shifts) {
@@ -74,6 +79,7 @@ public class Menu {
 		}
 	}
 
+	//更新の処理
 	public void showUpdateShift() {
 		int id = input.inputInt("更新するIDを入力してください:");
 		Shift shift = shiftService.findShiftById(id);
@@ -91,6 +97,7 @@ public class Menu {
 		}
 	}
 
+	//削除の処理
 	public void showDeleteShift() {
 		int id = input.inputInt("削除するIDを入力してください:");
 		Shift shift = shiftService.findShiftById(id);
@@ -104,6 +111,7 @@ public class Menu {
 		}
 	}
 
+	//給与確認の処理
 	public void showSalary() {
 		int year = input.inputInt("確認する年を入力してください 例(XXXX)");
 		int month = input.inputInt("確認する月を入力してください 例(MM)");
@@ -111,6 +119,7 @@ public class Menu {
 		System.out.println(year + "年" + month + "月の給与額は" + salary + "円です");
 	}
 
+	//時給変更の処理
 	public void showChangeHourlyWage() {
 		System.out.println("現在の時給" + shiftService.getCurrentHourlyWage() + "円");
 		int hourlyWage = input.inputInt("新しい時給を入力してください:");
@@ -123,6 +132,7 @@ public class Menu {
 		System.out.println("時給を" + hourlyWage + "円に変更しました");
 	}
 
+	//目標給与の設定の処理
 	public void showTargetSalary() {
 		int year = input.inputInt("目標を設定したい年を入力してください 例(XXXX):");
 		int month = input.inputInt("目標を設定したい月を入力してください 例(MM):");
@@ -140,6 +150,7 @@ public class Menu {
 		System.out.println(year + "年" + month + "月の目標給与を" + targetSalary + "円に設定しました");
 	}
 
+	//目標給料の確認の処理
 	public void showTargetSalaryConfirmation() {
 		int year = input.inputInt("確認したい年を入力してください 例(XXXX):");
 		int month = input.inputInt("確認したい月を入力してください 例(MM):");

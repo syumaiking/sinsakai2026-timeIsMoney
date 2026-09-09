@@ -15,7 +15,7 @@ public class Main {
 		Menu menu = new Menu(input, shiftService);
 		while (true) {
 
-			menu.showMainMenu();
+			menu.showMainMenu();//メインメニュー
 
 			int number = input.inputInt("番号を入力してください:");
 
@@ -27,31 +27,31 @@ public class Main {
 
 				switch (shiftNumber) {
 				case 1: {
-					menu.showShiftRegistration();
+					menu.showShiftRegistration();//勤務登録
 					break;
 				}
 				case 2: {
 					List<Shift> shifts = shiftService.getAllShifts();
-					menu.showAllShift(shifts);
+					menu.showAllShift(shifts);//勤務一覧
 					break;
 				}
 				case 3: {
 					List<Shift> shifts = shiftService.getAllShifts();
 					menu.showAllShift(shifts);
-					menu.showUpdateShift();
+					menu.showUpdateShift();//勤務データ更新
 					break;
 				}
 				case 4: {
 					List<Shift> shifts = shiftService.getAllShifts();
 					menu.showAllShift(shifts);
-					menu.showDeleteShift();
+					menu.showDeleteShift();//勤務データ削除
 					break;
 				}
 				case 0: {
-					break;
+					break;//戻る
 				}
 				default:
-					System.out.println("0~4の番号択してください");
+					System.out.println("0~4の番号択してください");//例外処理
 					break;
 				}
 				break;
@@ -62,26 +62,26 @@ public class Main {
 				int SalaryNumber = input.inputInt("番号を入力してください:");
 				switch (SalaryNumber) {
 				case 1: {
-					menu.showSalary();
+					menu.showSalary();//給与確認
 					break;
 				}
 				case 2: {
-					menu.showChangeHourlyWage();
+					menu.showChangeHourlyWage();//時給変更
 					break;
 				}
 				case 3: {
-					menu.showTargetSalary();
+					menu.showTargetSalary();//給与目標の設定
 					break;
 				}
 				case 4: {
-					menu.showTargetSalaryConfirmation();
+					menu.showTargetSalaryConfirmation();//目標給料の確認
 					break;
 				}
 				case 0: {
-					break;
+					break;//戻る
 				}
 				default:
-					System.out.println("0~4の番号を入力してください");
+					System.out.println("0~4の番号を入力してください");//例外
 				}
 				break;
 			}
